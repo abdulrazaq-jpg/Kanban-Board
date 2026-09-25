@@ -1,0 +1,94 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.appContainer{
+    display: flex;
+    min-height: 100vh;
+}
+
+aside{
+    min-width: 280px;
+    height: 100vh;
+    padding-left: 10px;
+    background-color: #122133;
+    color: rgb(208, 203, 203);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 20px;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.iconElement{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin: 10px 0;
+    padding-left: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: larger;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.mainLogo{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.icons{
+    filter: invert(100%);
+    width: 20px;
+    height: 20px;
+    margin: 10px 0;
+}
+
+.iconElement:hover{
+    background-color: rgb(92, 5, 92);
+    border: 1px solid rgb(255, 4, 255);
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+#foot{
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#footerLogo{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.prof{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+#name{
+    color: white;
+    font-size: 20px;
+}
