@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanban-Board</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="appContainer">
         <aside>
@@ -49,7 +51,54 @@
                 </div>
             </footer>
         </aside>
+        <main>
+            <header class="workSpace">
+                <div class="header-left">
+                    <h2>Project Board</h2>
+
+                    <div class="drop">
+                        <button class="dropdown">
+                            <span>Website Redesign</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                    </div>
+
+                    <input type="text" class="search" placeholder="Search tasks...">
+                </div>
+                <div class="header-right">
+                    <button class="filter">
+                        <img src="app.png" alt="" class="icons">
+                        <span>Filter</span>
+                    </button>
+
+                    <button class="sort">
+                        <img src="app.png" alt="" class="icons">
+                        <span>Sort</span>
+                    </button>
+
+                    <button class="notify">
+                        <img src="app.png" alt="" class="icons">
+                    </button>
+
+                    <div class="divider"></div>
+
+                    <button class="theme">
+                        <img src="app.png" alt="" class="icons">
+                    </button>
+
+                    <img src="logo.jpeg" alt="logo" class="mainLogo">
+                </div>
+            </header>
+            <div class="content">
+                <div class="boxes"></div>
+                <div class="boxes"></div>
+                <div class="boxes"></div>
+                <div class="boxes"></div>
+                <div class="boxes"></div>
+            </div>
+        </main>
     </div>
     <script src="app.js"></script>
 </body>
+
 </html>
