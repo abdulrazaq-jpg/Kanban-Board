@@ -89,13 +89,43 @@
                     <img src="logo.jpeg" alt="logo" class="mainLogo">
                 </div>
             </header>
-            <div class="content">
-                <div class="boxes"></div>
-                <div class="boxes"></div>
-                <div class="boxes"></div>
-                <div class="boxes"></div>
-                <div class="boxes"></div>
-            </div>
+            <section class="content">
+                <div class="kanban-column" data-status="backlog">
+                    <div class="columnHeader">
+                        <h2>Backlog</h2>
+                        <span class="taskCount">0</span>
+                    </div>
+                    <div class="taskList"></div>
+                </div>
+                <div class="kanban-column" data-status="todo">
+                    <div class="columnHeader">
+                        <h2>To-Do</h2>
+                        <span class="taskCount">0</span>
+                    </div>
+                    <div class="taskList"></div>
+                </div>
+                <div class="kanban-column" data-status="in-progress">
+                    <div class="columnHeader">
+                        <h2>In-Progress</h2>
+                        <span class="taskCount">0</span>
+                    </div>
+                    <div class="taskList"></div>
+                </div>
+                <div class="kanban-column" data-status="review">
+                    <div class="columnHeader">
+                        <h2>Review</h2>
+                        <span class="taskCount">0</span>
+                    </div>
+                    <div class="taskList"></div>
+                </div>
+                <div class="kanban-column" data-status="done">
+                    <div class="columnHeader">
+                        <h2>Done</h2>
+                        <span class="taskCount">0</span>
+                    </div>
+                    <div class="taskList"></div>
+                </div>
+            </section>
         </main>
     </div>
     <script src="app.js"></script>

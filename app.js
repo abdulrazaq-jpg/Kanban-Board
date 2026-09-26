@@ -55,3 +55,36 @@ let tasks = [
         subtasks: "2/2"
     }
 ];
+
+function renderTasks(){
+    const columns = document.querySelectorAll(".kanban-column");
+    
+    columns.forEach(column => {
+        let status = column.dataset.status;
+        const temp = tasks.filter(task => task.status === status);
+    
+        let content = column.querySelector(".taskList");
+        column.querySelector(".taskCount").innerHTML = temp.length;
+    
+        const Allcardshtml = temp.map(task => `
+            <div class="task-card" data-id="${task.id}">
+                <div class="card-header">
+                    <span class="card-category ${task.tagClass}">${task.tag}</span>
+                    <span class="card-priority ${task.priorityClass}">${task.priority}</span>
+                </div>
+                
+                <h3 class="card-title">${task.title}</h3>
+                <p class="card-description">${task.description}</p>
+                
+                <div class="card-footer">
+                    <span class="task-subtasks">📋 ${task.subtasks}</span>
+                    <span class="task-id">#${task.id}</span>
+                </div>
+            </div>
+        `).join('');
+
+        content.innerHTML = Allcardshtml;
+    });
+}
+
+renderTasks();
