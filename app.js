@@ -75,11 +75,11 @@ function renderTasks(){
             </div>
             
             <h3 class="card-title">${task.title}</h3>
-            <p class="card-description">${task.description}</p>
+            <p class="card-description">${task.description}</p><br>
             
             <div class="card-footer">
             <span class="task-subtasks">📋 ${task.subtasks}</span>
-            <span class="task-id">#${task.id}</span>
+            <span class="task-id"># ${task.id}</span>
             </div>
             </div>
             `).join('');
@@ -88,14 +88,14 @@ function renderTasks(){
         });
     }
     
-    renderTasks();
-    
 document.addEventListener("dragstart",(e)=>{
     const card = e.target.closest(".task-card");
     if(!card) return;
 
     card.classList.add('dragging');
     e.dataTransfer.setData("text/plain",card.dataset.id);
+
+    setTimeout(()=> card.classList.add('dragging'),0);
 });
 
 document.addEventListener("dragend",(e)=>{
@@ -126,3 +126,6 @@ document.addEventListener("drop",(e)=>{
 
     renderTasks();
 });
+
+renderTasks();
+
