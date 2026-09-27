@@ -56,35 +56,73 @@ let tasks = [
     }
 ];
 
+
 function renderTasks(){
-    const columns = document.querySelectorAll(".kanban-column");
+    const columns = document.querySelectorAll(".kanbancolumn");
     
     columns.forEach(column => {
         let status = column.dataset.status;
         const temp = tasks.filter(task => task.status === status);
-    
+        
         let content = column.querySelector(".taskList");
         column.querySelector(".taskCount").innerHTML = temp.length;
-    
+        
         const Allcardshtml = temp.map(task => `
-            <div class="task-card" data-id="${task.id}">
-                <div class="card-header">
-                    <span class="card-category ${task.tagClass}">${task.tag}</span>
-                    <span class="card-priority ${task.priorityClass}">${task.priority}</span>
-                </div>
-                
-                <h3 class="card-title">${task.title}</h3>
-                <p class="card-description">${task.description}</p>
-                
-                <div class="card-footer">
-                    <span class="task-subtasks">📋 ${task.subtasks}</span>
-                    <span class="task-id">#${task.id}</span>
-                </div>
+            <div class="task-card" data-id="${task.id}" draggable = "true">
+            <div class="card-header">
+            <span class="card-category ${task.tagClass}">${task.tag}</span>
+            <span class="card-priority ${task.priorityClass}">${task.priority}</span>
             </div>
-        `).join('');
+            
+            <h3 class="card-title">${task.title}</h3>
+            <p class="card-description">${task.description}</p>
+            
+            <div class="card-footer">
+            <span class="task-subtasks">📋 ${task.subtasks}</span>
+            <span class="task-id">#${task.id}</span>
+            </div>
+            </div>
+            `).join('');
+            
+            content.innerHTML = Allcardshtml;
+        });
+    }
+    
+    renderTasks();
+    
+document.addEventListener("dragstart",(e)=>{
+    const card = e.target.closest(".task-card");
+    if(!card) return;
 
-        content.innerHTML = Allcardshtml;
-    });
-}
+    card.classList.add('dragging');
+    e.dataTransfer.setData("text/plain",card.dataset.id);
+});
 
-renderTasks();
+document.addEventListener("dragend",(e)=>{
+    const card = e.target.closest(".task-card");
+    if(!card) return;
+
+    card.classList.remove('dragging');
+});
+
+document.addEventListener("dragover",(e)=>{
+    if (e.target.closest(".kanbancolumn")) {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener("drop",(e)=>{
+    e.preventDefault();
+
+    const column = e.target.closest(".kanbancolumn");
+    if (!column) return;
+
+    const id = e.dataTransfer.getData("text/plain");
+    const task = tasks.find(t => t.id===id);
+
+    if(task){
+        task.status = column.dataset.status;
+    }
+
+    renderTasks();
+});

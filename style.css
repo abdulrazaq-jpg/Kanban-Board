@@ -196,7 +196,7 @@ main{
     flex: 1;
 }
 
-.kanban-column{
+.kanbancolumn{
     background-color: #EBEEF2;
     border-radius: 12px;
     min-width: 280px;
