@@ -92,7 +92,6 @@ document.addEventListener("dragstart",(e)=>{
     const card = e.target.closest(".task-card");
     if(!card) return;
 
-    card.classList.add('dragging');
     e.dataTransfer.setData("text/plain",card.dataset.id);
 
     setTimeout(()=> card.classList.add('dragging'),0);
@@ -129,3 +128,66 @@ document.addEventListener("drop",(e)=>{
 
 renderTasks();
 
+const form = document.querySelector(".add");
+const addTaskbtn = document.querySelector(".addTask");
+const cancelBtns = document.querySelectorAll(".cancel");
+const modalOverlay = document.getElementById("modalOverlay");
+
+function openModal() {
+    modalOverlay.classList.add("appear");
+}
+
+function closeModal() {
+    modalOverlay.classList.remove("appear");
+}
+
+addTaskbtn.addEventListener("click", openModal);
+cancelBtns.forEach(btn => btn.addEventListener("click", closeModal));
+
+function createTask() {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        const title = formData.get('title');
+        const desc = formData.get('description');
+        const status = formData.get('status');
+        const priority = formData.get('priority');
+        const tag = formData.get('tag');
+
+        let tagClass = "none";
+        if (tag === "UI/UX") {
+            tagClass = "tag-ui";
+        } else {
+            tagClass = `tag-${tag.toLowerCase()}`;
+        }
+
+        const priorityClass = `priority-${priority.toLowerCase()}`;
+        const id = `task-${Date.now()}`;
+
+        const formattedPriority = priority.charAt(0).toUpperCase() + priority.slice(1);
+
+        const newTask = {
+            id: id,
+            title: title,
+            description: desc,
+            status: status,
+            tag: tag,
+            tagClass: tagClass,
+            priority: formattedPriority,
+            priorityClass: priorityClass,
+            subtasks: "0/5"
+        };
+
+        tasks.push(newTask);
+
+        renderTasks();
+
+        e.target.reset();
+
+        closeModal();
+    });
+}
+
+createTask();
