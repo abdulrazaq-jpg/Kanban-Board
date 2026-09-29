@@ -56,7 +56,6 @@ let tasks = [
     }
 ];
 
-
 function renderTasks(){
     const columns = document.querySelectorAll(".kanbancolumn");
     
@@ -72,6 +71,7 @@ function renderTasks(){
             <div class="card-header">
             <span class="card-category ${task.tagClass}">${task.tag}</span>
             <span class="card-priority ${task.priorityClass}">${task.priority}</span>
+            <button class="delete">Delete</button>
             </div>
             
             <h3 class="card-title">${task.title}</h3>
@@ -191,3 +191,15 @@ function createTask() {
 }
 
 createTask();
+
+document.addEventListener("click",(e)=>{
+    const delbtn = e.target.closest(".delete");
+
+    if(!delbtn) return;
+    
+    const del = e.target.closest(".task-card");
+    const taskId = del.dataset.id;
+    const index = tasks.findIndex(t=>t.id === taskId);
+    tasks.splice(index,1);
+    renderTasks();
+});

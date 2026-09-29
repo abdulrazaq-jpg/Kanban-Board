@@ -246,6 +246,16 @@ main{
     margin-bottom: 10px;
 }
 
+.delete{
+    background-color: #b62626;
+    color: white;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .card-category{
     border-radius: 20px;
     padding: 5px;
