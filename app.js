@@ -213,19 +213,27 @@ filterbtn.addEventListener("click", () => {
 
 const applyfilter = document.querySelector(".filtermenu");
 
-applyfilter.addEventListener("submit",(e)=>{
+applyfilter.addEventListener("submit", (e) => {
     e.preventDefault();
+
     const tagtofilter = document.querySelector('input[name = "ftag"]:checked');
-    const ftag = tagtofilter.value;
     const prioritytofilter = document.querySelector('input[name = "fpriority"]:checked');
+
+    const ftag = tagtofilter.value;
     const fpriority = prioritytofilter.value;
-    const tagfilteredtasks = tasks.filter(t=>(t.tag === ftag && t.priority === fpriority));
-    renderTasks(tagfilteredtasks);
+
+    const filteredtasks = tasks.filter(t => {
+        const matchesTag = (ftag === "All") || (t.tag === ftag);
+        const matchesPriority = (fpriority === "All") || (t.priority === fpriority);
+
+        return matchesTag && matchesPriority;
+    });
+    renderTasks(filteredtasks);
 });
 
 const closefilterbtn = document.querySelector(".closefilter");
 
-closefilterbtn.addEventListener("click",()=>{
+closefilterbtn.addEventListener("click", () => {
     const element = document.querySelector(".filtermenu");
     element.classList.remove("appearfilter");
 });
