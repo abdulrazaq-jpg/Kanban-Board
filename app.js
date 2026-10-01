@@ -1,4 +1,4 @@
-let tasks = [
+let defaulttasks = [
     {
         id: "task-101",
         title: "Design System Accessibility Review",
@@ -55,6 +55,21 @@ let tasks = [
         subtasks: "2/2"
     }
 ];
+
+function saveTasks(array) {
+  localStorage.setItem("tasks", JSON.stringify(array));
+}
+
+function loadTasks() {
+  const storedTasks = localStorage.getItem("tasks");
+  if (storedTasks) {
+    return JSON.parse(storedTasks);
+  }
+
+  return defaulttasks;
+}
+
+let tasks = loadTasks();
 
 function renderTasks(array) {
     const columns = document.querySelectorAll(".kanbancolumn");
@@ -122,10 +137,11 @@ document.addEventListener("drop", (e) => {
     if (task) {
         task.status = column.dataset.status;
     }
-
+    saveTasks(tasks);
     renderTasks(tasks);
 });
 
+saveTasks(tasks);
 renderTasks(tasks);
 
 const form = document.querySelector(".add");
@@ -181,7 +197,7 @@ function createTask() {
         };
 
         tasks.push(newTask);
-
+        saveTasks(tasks);
         renderTasks(tasks);
 
         e.target.reset();
@@ -201,6 +217,7 @@ document.addEventListener("click", (e) => {
     const taskId = del.dataset.id;
     const index = tasks.findIndex(t => t.id === taskId);
     tasks.splice(index, 1);
+    saveTasks(tasks);
     renderTasks(tasks);
 });
 
@@ -228,7 +245,9 @@ applyfilter.addEventListener("submit", (e) => {
 
         return matchesTag && matchesPriority;
     });
+
     renderTasks(filteredtasks);
+    applyfilter.classList.remove("appearfilter");
 });
 
 const closefilterbtn = document.querySelector(".closefilter");
@@ -250,6 +269,6 @@ searchBar.addEventListener("input", (e) => {
         const descriptionmatch = t.description.toLowerCase().includes(query);
         return tagmatch || prioritymatch || titlematch || descriptionmatch;
     });
-
+    
     renderTasks(searchTasks);
 });
