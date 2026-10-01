@@ -238,3 +238,18 @@ closefilterbtn.addEventListener("click", () => {
     element.classList.remove("appearfilter");
 });
 
+const searchBar = document.querySelector(".search");
+
+searchBar.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+
+    const searchTasks = tasks.filter(t => {
+        const tagmatch = t.tag.toLowerCase().includes(query);
+        const prioritymatch = t.priority.toLowerCase().includes(query);
+        const titlematch = t.title.toLowerCase().includes(query);
+        const descriptionmatch = t.description.toLowerCase().includes(query);
+        return tagmatch || prioritymatch || titlematch || descriptionmatch;
+    });
+
+    renderTasks(searchTasks);
+});
