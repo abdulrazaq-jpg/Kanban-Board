@@ -254,6 +254,12 @@ main{
     cursor: grabbing;
 }
 
+#task-desc{
+    /* width: 100%;
+    box-sizing: border-box; */
+    resize: none;
+}
+
 .card-header {
     display: flex;
     justify-content: space-between;
