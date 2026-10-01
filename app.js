@@ -217,7 +217,9 @@ applyfilter.addEventListener("submit",(e)=>{
     e.preventDefault();
     const tagtofilter = document.querySelector('input[name = "ftag"]:checked');
     const ftag = tagtofilter.value;
-    const tagfilteredtasks = tasks.filter(t=>t.tag === ftag);
+    const prioritytofilter = document.querySelector('input[name = "fpriority"]:checked');
+    const fpriority = prioritytofilter.value;
+    const tagfilteredtasks = tasks.filter(t=>(t.tag === ftag && t.priority === fpriority));
     renderTasks(tagfilteredtasks);
 });
 
@@ -226,4 +228,5 @@ const closefilterbtn = document.querySelector(".closefilter");
 closefilterbtn.addEventListener("click",()=>{
     const element = document.querySelector(".filtermenu");
     element.classList.remove("appearfilter");
-})
+});
+
