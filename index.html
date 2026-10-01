@@ -134,13 +134,41 @@
                 </form>
 
                 <div class="header-right">
-                    <button class="filter">
-                        <img src="app.png" alt="" class="icons">
+                    <button id="filter">
+                        <img src="filter.png" alt="" class="icons">
                         <span>Filter</span>
                     </button>
+                    
+                    <form class="filtermenu">
+                        <header class="fil">
+                            <h2>Filter Tasks</h2>
+                            <button class="closefilter" type="button">Close</button>
+                        </header>
+                        <div class="bytag">
+                            <input type="radio" id = "tag-ui" name="ftag" value="UI/UX" checked>
+                            <label for="tag-ui">UI/UX</label>
+
+                            <input type="radio" id="tag-Frontend" name="ftag" value="Frontend" checked>
+                            <label for="tag-Frontend">Frontend</label>
+    
+                            <input type="radio" id="tag-Backend" name="ftag" value="Backend" checked>
+                            <label for="tag-Backend">Backend</label>
+                        </div>
+                        <div class="bypriority">
+                            <input type="radio" id = "priority-Low" name="fpriority" value="Low" checked>
+                            <label for="priority-Low">Low</label>
+    
+                            <input type="radio" id="priority-Med" name="fpriority" value="Med" checked>
+                            <label for="priority-Med">Medium</label>
+    
+                            <input type="radio" id="priority-High" name="fpriority" value="High" checked>
+                            <label for="priority-High">High</label>
+                        </div>
+                        <button class="filtertask" type="submit">Apply Filter</button>
+                    </form>
 
                     <button class="sort">
-                        <img src="app.png" alt="" class="icons">
+                        <img src="sort.png" alt="" class="icons">
                         <span>Sort</span>
                     </button>
 

@@ -176,7 +176,7 @@ main{
     background-color: #F8FAFC;
 }
 
-.filter, .sort, .notify, .theme {
+#filter{
     padding: 8px 12px;
     border: 1px solid #E2E8F0;
     border-radius: 8px;
@@ -185,6 +185,21 @@ main{
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.sort, .notify, .theme {
+    padding: 8px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    background: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#filter .icons{
+    filter: invert(0%);
 }
 
 .filter .icons, .sort .icons, .notify .icons, .theme .icons {
@@ -368,7 +383,7 @@ main{
 /* --- Simple Button Styling --- */
 .addTask, 
 .submit-btn,
-.cancel{
+.filtertask{
     background-color: #2b3f6c;
     color: white;
     padding: 8px 16px;
@@ -386,6 +401,43 @@ main{
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.fil{
+    display: flex;
+    justify-content: space-between;
+}
+
+.closefilter{
+    background-color: #b62626;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filtermenu{
+    display: none;
+}
+
+.appearfilter{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 450px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+
 }
 
 /* Responsive Breakpoint for Mobile Screens */

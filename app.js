@@ -56,16 +56,16 @@ let tasks = [
     }
 ];
 
-function renderTasks(){
+function renderTasks(array) {
     const columns = document.querySelectorAll(".kanbancolumn");
-    
+
     columns.forEach(column => {
         let status = column.dataset.status;
-        const temp = tasks.filter(task => task.status === status);
-        
+        const temp = array.filter(task => task.status === status);
+
         let content = column.querySelector(".taskList");
         column.querySelector(".taskCount").innerHTML = temp.length;
-        
+
         const Allcardshtml = temp.map(task => `
             <div class="task-card" data-id="${task.id}" draggable = "true">
             <div class="card-header">
@@ -83,50 +83,50 @@ function renderTasks(){
             </div>
             </div>
             `).join('');
-            
-            content.innerHTML = Allcardshtml;
-        });
-    }
-    
-document.addEventListener("dragstart",(e)=>{
+
+        content.innerHTML = Allcardshtml;
+    });
+}
+
+document.addEventListener("dragstart", (e) => {
     const card = e.target.closest(".task-card");
-    if(!card) return;
+    if (!card) return;
 
-    e.dataTransfer.setData("text/plain",card.dataset.id);
+    e.dataTransfer.setData("text/plain", card.dataset.id);
 
-    setTimeout(()=> card.classList.add('dragging'),0);
+    setTimeout(() => card.classList.add('dragging'), 0);
 });
 
-document.addEventListener("dragend",(e)=>{
+document.addEventListener("dragend", (e) => {
     const card = e.target.closest(".task-card");
-    if(!card) return;
+    if (!card) return;
 
     card.classList.remove('dragging');
 });
 
-document.addEventListener("dragover",(e)=>{
+document.addEventListener("dragover", (e) => {
     if (e.target.closest(".kanbancolumn")) {
         e.preventDefault();
     }
 });
 
-document.addEventListener("drop",(e)=>{
+document.addEventListener("drop", (e) => {
     e.preventDefault();
 
     const column = e.target.closest(".kanbancolumn");
     if (!column) return;
 
     const id = e.dataTransfer.getData("text/plain");
-    const task = tasks.find(t => t.id===id);
+    const task = tasks.find(t => t.id === id);
 
-    if(task){
+    if (task) {
         task.status = column.dataset.status;
     }
 
-    renderTasks();
+    renderTasks(tasks);
 });
 
-renderTasks();
+renderTasks(tasks);
 
 const form = document.querySelector(".add");
 const addTaskbtn = document.querySelector(".addTask");
@@ -182,7 +182,7 @@ function createTask() {
 
         tasks.push(newTask);
 
-        renderTasks();
+        renderTasks(tasks);
 
         e.target.reset();
 
@@ -192,14 +192,38 @@ function createTask() {
 
 createTask();
 
-document.addEventListener("click",(e)=>{
+document.addEventListener("click", (e) => {
     const delbtn = e.target.closest(".delete");
 
-    if(!delbtn) return;
-    
+    if (!delbtn) return;
+
     const del = e.target.closest(".task-card");
     const taskId = del.dataset.id;
-    const index = tasks.findIndex(t=>t.id === taskId);
-    tasks.splice(index,1);
-    renderTasks();
+    const index = tasks.findIndex(t => t.id === taskId);
+    tasks.splice(index, 1);
+    renderTasks(tasks);
 });
+
+const filterbtn = document.querySelector("#filter");
+
+filterbtn.addEventListener("click", () => {
+    const element = document.querySelector(".filtermenu");
+    element.classList.add("appearfilter");
+});
+
+const applyfilter = document.querySelector(".filtermenu");
+
+applyfilter.addEventListener("submit",(e)=>{
+    e.preventDefault();
+    const tagtofilter = document.querySelector('input[name = "ftag"]:checked');
+    const ftag = tagtofilter.value;
+    const tagfilteredtasks = tasks.filter(t=>t.tag === ftag);
+    renderTasks(tagfilteredtasks);
+});
+
+const closefilterbtn = document.querySelector(".closefilter");
+
+closefilterbtn.addEventListener("click",()=>{
+    const element = document.querySelector(".filtermenu");
+    element.classList.remove("appearfilter");
+})
